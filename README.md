@@ -93,3 +93,21 @@ Appscripts config(Email sending)
 Who has access: Anyone
 
 9. copy the exec appscripts url in cloudflare - Settings - Variables and secrets - APPS_SCRIPT_URL
+
+    
+Appscripts config(Feedback sending, After event )
+1. Copy the needed entries from QR Email sheet to Feedback sheet in format as needed
+2. Edit the Feedback.gs with needed questions as per the current event eg auction, housie etc
+3. in appscripts click Feedback.gs run CreateFeedbackForm function
+4. in "Test Email" column , make YES for test emails to be sent eg core team
+5. FeedbackEmail.gs and run TestFeedbackEmail function
+6. Emails will be sent to test recipients, modify email content as needed
+7. Send Email to all participant, run SendAllFeedbackEmails Function, email sent status is updated in google sheet
+8. FeedbackDashboard.gs need to be updated each time based on columns in response sheet
+9. FeedbackDashboard.gs createFeedbackDashboard new sheet with dash board will be created
+
+
+   in case form need to be edited after creation, run clearFeedbackFormId, right click on the response sheet, unlink form, in google sheet
+   and CreateFeedbackForm again
+   
+
