@@ -814,6 +814,36 @@ body {
 
 
 /* =========================================================
+   CHECK-IN PROGRESS CYLINDER
+========================================================= */
+
+.checkin-cylinder {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    height: 18px;
+    padding: 4px;
+    margin: 10px 0 14px;
+    box-sizing: border-box;
+    background: var(--panel);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.checkin-cylinder .checkin-dot {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border-radius: 1px;
+    background: #344052;
+}
+
+.checkin-cylinder .checkin-dot.filled {
+    background: var(--green);
+}
+
+/* =========================================================
    DIAGNOSTICS
 ========================================================= */
 
