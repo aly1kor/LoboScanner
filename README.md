@@ -96,18 +96,26 @@ Who has access: Anyone
 
     
 Appscripts config(Feedback sending, After event )
-1. Copy the needed entries from QR Email sheet to Feedback sheet in format as needed
-2. Edit the Feedback.gs with needed questions as per the current event eg auction, housie etc
-3. in appscripts click Feedback.gs run CreateFeedbackForm function
-4. in "Test Email" column , make YES for test emails to be sent eg core team
-5. FeedbackEmail.gs and run TestFeedbackEmail function
-6. Emails will be sent to test recipients, modify email content as needed
-7. Send Email to all participant, run SendAllFeedbackEmails Function, email sent status is updated in google sheet
-8. FeedbackDashboard.gs need to be updated each time based on columns in response sheet
-9. FeedbackDashboard.gs createFeedbackDashboard new sheet with dash board will be created
+Step 1 — 
+Edit the Feedback.gs with needed questions as per the current event eg auction, housie etc, Create the form( this is best way to change to avoid issues in dash board due to chnages)
+Run createFeedbackForm() once. This should create the form and save its ID in Script Properties.
+Edit the form if needed and publish, you will see the changes immediately in view form link.
 
+Step 2 — Open and link it
+Run openFeedbackForm() to retrieve the form URLs, then run linkFeedbackForm() to link it to your existing spreadsheet.
 
-   in case form need to be edited after creation, run clearFeedbackFormId, right click on the response sheet, unlink form, in google sheet
-   and CreateFeedbackForm again
+Step 3 — Confirm the response tab
+Find the new response tab in the spreadsheet, rename the sheet eg "FeedbackResponses" and enter its exact name into Config.gs CONFIG.FEEDBACK.RESPONSE_SHEET.
+
+Step 4 — Test the feedback email
+Send a test email and verify the form link, Registration ID, anonymity wording, and feedback-email tracking.
+
+Step 5 — Test the dashboard
+Run setupFeedbackDashboard(), submit a test response, and verify the dashboard refresh. Then configure setupFeedbackTrigger() to automate updates.
+based on changes done in questionaire in step1 some changes may have to be done in FeedbackDashboard.gs based on headers in response sheet, search the error and find the new names
+
+Step 5 — Automnatic trigger Select setupFeedbackTrigger in the function dropdown.
+Click Run and authorize it when prompted.
+
    
 
