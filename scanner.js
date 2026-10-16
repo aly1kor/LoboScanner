@@ -2212,7 +2212,7 @@ async function verifyCheckinWithRetry(token) {
 
 
 function updateCheckinCylinder(percentage) {
-    const bar = document.getElementById("checkinCylinder");
+    const bar = document.getElementById("homeCheckinCylinder");
     if (!bar) return;
 
     const percent = Math.max(
@@ -2414,6 +2414,8 @@ function updateHomeStatistics(stats) {
             stats.entryCheckInPercent
         ).toFixed(1) +
         "%)";
+
+    updateCheckinCylinder(stats.participantCheckInPercent);
 }
 
 
