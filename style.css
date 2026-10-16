@@ -812,21 +812,15 @@ body {
     margin-left: 4px;
 }
 
-
 /* =========================================================
-   CHECK-IN PROGRESS CYLINDER
-========================================================= */
-
-
-/* =========================================================
-   CHECK-IN PROGRESS CYLINDER WITH OVERLAID PERCENTAGE
+   CHECK-IN PROGRESS CYLINDERS
 ========================================================= */
 
 .checkin-cylinder {
     position: relative;
     width: 100%;
     height: 30px;
-    margin: 8px 0 16px;
+    margin: 8px 0 4px;
     box-sizing: border-box;
     background: #263142;
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -834,35 +828,25 @@ body {
     overflow: hidden;
 }
 
-
-
-.checkin-cylinder .checkin-dot {
-    flex: 1;
-    min-width: 0;
-    height: 100%;
-    border-radius: 1px;
-    background: #344052;
-}
-
-.checkin-cylinder .checkin-dot.filled {
-    background: var(--green);
-}
-
-.checkin-cylinder .cylinder-label {
+.checkin-cylinder .cylinder-fill {
     position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: bold;
-    white-space: nowrap;
-    text-shadow: 0 1px 3px #000000, 0 0 3px #000000;
-    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: var(--green);
+    border-radius: 20px;
+    transition: width 0.3s ease;
 }
 
+.cylinder-label {
+    display: block;
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
 /* =========================================================
    DIAGNOSTICS
 ========================================================= */
