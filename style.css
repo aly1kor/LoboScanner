@@ -266,7 +266,7 @@ body {
 
 
 #manualModeBtn {
-    background: var(--purple);
+    background: var(--blue);
     color: var(--text);
 }
 
@@ -727,7 +727,7 @@ body {
 ========================================================= */
 
 .secondaryButton {
-    background: var(--purple);
+    background: var(--blue);
 
     color: var(--text);
 }
