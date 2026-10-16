@@ -812,8 +812,9 @@ body {
     margin-left: 4px;
 }
 
+
 /* =========================================================
-   CHECK-IN PROGRESS CYLINDERS
+   CHECK-IN PROGRESS CYLINDERS — SEGMENTED RECTANGLES
 ========================================================= */
 
 .checkin-cylinder {
@@ -834,8 +835,17 @@ body {
     left: 0;
     height: 100%;
     width: 0;
-    background: var(--green);
-    border-radius: 20px;
+    box-sizing: border-box;
+
+    /* Rectangular segments with small gaps */
+    background: repeating-linear-gradient(
+        90deg,
+        var(--green) 0,
+        var(--green) 12px,
+        transparent 12px,
+        transparent 16px
+    );
+
     transition: width 0.3s ease;
 }
 
