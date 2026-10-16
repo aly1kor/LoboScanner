@@ -2211,6 +2211,43 @@ async function verifyCheckinWithRetry(token) {
 }
 
 
+function updateCheckinCylinder(percentage) {
+    const bar = document.getElementById("checkinCylinder");
+    if (!bar) return;
+
+    const percent = Math.max(
+        0,
+        Math.min(100, Number(percentage) || 0)
+    );
+
+    const totalSegments = 50;
+    const filledSegments = Math.round(
+        (percent / 100) * totalSegments
+    );
+
+    bar.innerHTML = "";
+
+    for (let i = 0; i < totalSegments; i++) {
+        const segment = document.createElement("span");
+
+        segment.className = "checkin-dot";
+
+        if (i < filledSegments) {
+            segment.classList.add("filled");
+        }
+
+        bar.appendChild(segment);
+    }
+
+    bar.setAttribute("aria-valuenow", String(Math.round(percent)));
+    bar.setAttribute(
+        "aria-valuetext",
+        `${percent.toFixed(1)}% checked in`
+    );
+}
+
+
+
 async function apiStatistics() {
 
     const start =
@@ -2301,6 +2338,12 @@ function updateStatistics(stats) {
         ).toFixed(1) +
         "%)";
 
+    // NEW: Update participant check-in cylinder
+    updateCheckinCylinder(
+        stats.participantCheckInPercent
+    );
+    
+
     document.getElementById(
         "statEntries"
     ).textContent =
@@ -2319,6 +2362,12 @@ function updateStatistics(stats) {
             stats.entryCheckInPercent
         ).toFixed(1) +
         "%)";
+
+
+        // NEW: Update entry check-in cylinder
+    // (only if a separate entry cylinder exists)
+    updateCheckinCylinder(
+        stats.entryCheckInPercent
 }
 
 
