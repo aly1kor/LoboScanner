@@ -855,7 +855,7 @@ body {
     display: block !important;
     color: #39b9ff !important;
     font-size: 16px !important;
-    font-weight: 700;
+    font-weight: 700 !important;
     text-align: center;
     text-shadow: none !important;
     margin: 0 0 16px;
