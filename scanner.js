@@ -2342,67 +2342,26 @@ function updateStatistics(stats) {
 
 
 function updateHomeStatistics(stats) {
-
     if (!stats || !stats.success) {
         return;
     }
 
-    document.getElementById(
-        "homeStatTotalParticipants"
-    ).textContent =
-        stats.totalParticipants;
+    // Participant check-in cylinder on Home screen
+    updateCheckinCylinder(
+        "homeParticipantCylinder",
+        stats.checkedInParticipants,
+        stats.totalParticipants,
+        stats.participantCheckInPercent
+    );
 
-    document.getElementById(
-        "homeStatCheckedInParticipants"
-    ).textContent =
-        stats.checkedInParticipants;
-
-    document.getElementById(
-        "homeStatParticipantPercent"
-    ).textContent =
-        "(" +
-        Number(
-            stats.participantCheckInPercent
-        ).toFixed(1) +
-        "%)";
-
-    document.getElementById(
-        "homeStatTotalEntries"
-    ).textContent =
-        stats.totalEntries;
-
-    document.getElementById(
-        "homeStatCheckedInEntries"
-    ).textContent =
-        stats.checkedInEntries;
-
-    document.getElementById(
-        "homeStatEntryPercent"
-    ).textContent =
-        "(" +
-        Number(
-            stats.entryCheckInPercent
-        ).toFixed(1) +
-        "%)";
-
-    updateCheckinCylinder(stats.participantCheckInPercent);
-
-updateCheckinCylinder(
-    "homeParticipantCylinder",
-    stats.checkedInParticipants,
-    stats.totalParticipants,
-    stats.participantCheckInPercent
-);
-
-updateCheckinCylinder(
-    "homeEntryCylinder",
-    stats.checkedInEntries,
-    stats.totalEntries,
-    stats.entryCheckInPercent
-);
-    
+    // Entry check-in cylinder on Home screen
+    updateCheckinCylinder(
+        "homeEntryCylinder",
+        stats.checkedInEntries,
+        stats.totalEntries,
+        stats.entryCheckInPercent
+    );
 }
-
 
 async function loadStatistics() {
 
