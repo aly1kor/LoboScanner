@@ -2211,8 +2211,9 @@ async function verifyCheckinWithRetry(token) {
 }
 
 
-function updateCheckinCylinder(percentage) {
-    const bar = document.getElementById("homeCheckinCylinder");
+
+function updateCheckinCylinder(elementId, percentage) {
+    const bar = document.getElementById(elementId);
     if (!bar) return;
 
     const percent = Math.max(
@@ -2229,7 +2230,6 @@ function updateCheckinCylinder(percentage) {
 
     for (let i = 0; i < totalSegments; i++) {
         const segment = document.createElement("span");
-
         segment.className = "checkin-dot";
 
         if (i < filledSegments) {
@@ -2368,6 +2368,17 @@ function updateStatistics(stats) {
     // (only if a separate entry cylinder exists)
     updateCheckinCylinder(
         stats.entryCheckInPercent);
+
+    updateCheckinCylinder(
+    "participantCylinder",
+    stats.participantCheckInPercent
+);
+
+updateCheckinCylinder(
+    "entryCylinder",
+    stats.entryCheckInPercent
+);
+    
 }
 
 
@@ -2416,6 +2427,16 @@ function updateHomeStatistics(stats) {
         "%)";
 
     updateCheckinCylinder(stats.participantCheckInPercent);
+
+    updateCheckinCylinder(
+    "homeParticipantCylinder",
+    stats.participantCheckInPercent
+);
+
+updateCheckinCylinder(
+    "homeEntryCylinder",
+    stats.entryCheckInPercent
+);
 }
 
 
