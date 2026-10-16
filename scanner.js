@@ -2213,17 +2213,15 @@ async function verifyCheckinWithRetry(token) {
 
 
 
+
 function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     const bar = document.getElementById(elementId);
-    if (!bar) {
-        console.warn("Statistics cylinder not found:", elementId);
-        return;
-    }
+    if (!bar) return;
 
     const checked = Number(checkedIn) || 0;
     const count = Number(total) || 0;
-    const suppliedPercent = Number(percentage);
 
+    const suppliedPercent = Number(percentage);
     const percent = Math.max(0, Math.min(
         100,
         Number.isFinite(suppliedPercent)
@@ -2231,7 +2229,10 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
             : (count > 0 ? checked / count * 100 : 0)
     ));
 
-    // Reuse the existing fill; remove duplicate children.
+    // Remove any old label left inside the cylinder.
+    bar.querySelectorAll(".cylinder-label").forEach(el => el.remove());
+
+    // Rebuild the segmented fill.
     bar.innerHTML = "";
 
     const fill = document.createElement("div");
@@ -2239,7 +2240,7 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     fill.style.width = percent + "%";
     bar.appendChild(fill);
 
-    // Use one stable label ID per cylinder.
+    // Reuse one label for each cylinder.
     const labelId = elementId + "Label";
     let label = document.getElementById(labelId);
 
@@ -2249,9 +2250,8 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
         label.className = "cylinder-label";
     }
 
-    // Ensure the label is outside the cylinder.
-    if (label.parentElement !== bar.parentElement ||
-        label.previousElementSibling !== bar) {
+    // Ensure the label is immediately after its own cylinder.
+    if (bar.nextElementSibling !== label) {
         bar.insertAdjacentElement("afterend", label);
     }
 
@@ -2260,6 +2260,7 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
 
     label.style.setProperty("color", "#39b9ff", "important");
     label.style.setProperty("font-size", "16px", "important");
+    label.style.setProperty("font-weight", "700", "important");
 
     bar.setAttribute("aria-valuenow", String(Math.round(percent)));
     bar.setAttribute(
@@ -2267,6 +2268,7 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
         `${checked} of ${count} checked in, ${percent.toFixed(1)}%`
     );
 }
+
 
 async function apiStatistics() {
 
