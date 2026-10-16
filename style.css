@@ -849,13 +849,14 @@ body {
     transition: width 0.3s ease;
 }
 
+/* Counts and percentages below all cylinders */
 .cylinder-label {
     display: block;
-    margin: 0 0 16px;
-    color: var(--text);
-    font-size: 14px;
-    font-weight: bold;
+    color: #39b9ff !important;
+    font-size: 16px;
+    font-weight: 700;
     text-align: center;
+    margin: 0 0 16px;
 }
 /* =========================================================
    DIAGNOSTICS
