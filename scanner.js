@@ -2319,74 +2319,25 @@ if (diagnosticsEnabled()) {
 
 
 function updateStatistics(stats) {
-
     if (!stats || !stats.success) {
         return;
     }
 
-    document.getElementById(
-        "statParticipants"
-    ).textContent =
-        stats.totalParticipants;
-
-    document.getElementById(
-        "statCheckedParticipants"
-    ).textContent =
-        stats.checkedInParticipants;
-
-    document.getElementById(
-        "statParticipantPercent"
-    ).textContent =
-        "(" +
-        Number(
-            stats.participantCheckInPercent
-        ).toFixed(1) +
-        "%)";
-
-    // NEW: Update participant check-in cylinder
+    // Participant check-in cylinder
     updateCheckinCylinder(
+        "participantCylinder",
+        stats.checkedInParticipants,
+        stats.totalParticipants,
         stats.participantCheckInPercent
     );
-    
 
-    document.getElementById(
-        "statEntries"
-    ).textContent =
-        stats.totalEntries;
-
-    document.getElementById(
-        "statCheckedEntries"
-    ).textContent =
-        stats.checkedInEntries;
-
-    document.getElementById(
-        "statEntryPercent"
-    ).textContent =
-        "(" +
-        Number(
-            stats.entryCheckInPercent
-        ).toFixed(1) +
-        "%)";
-
-
-        // NEW: Update entry check-in cylinder
-    // (only if a separate entry cylinder exists)
-
-
-updateCheckinCylinder(
-    "participantCylinder",
-    stats.checkedInParticipants,
-    stats.totalParticipants,
-    stats.participantCheckInPercent
-);
-
-updateCheckinCylinder(
-    "entryCylinder",
-    stats.checkedInEntries,
-    stats.totalEntries,
-    stats.entryCheckInPercent
-);
-    
+    // Entry check-in cylinder
+    updateCheckinCylinder(
+        "entryCylinder",
+        stats.checkedInEntries,
+        stats.totalEntries,
+        stats.entryCheckInPercent
+    );
 }
 
 
