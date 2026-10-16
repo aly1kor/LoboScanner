@@ -851,12 +851,15 @@ body {
 
 /* Counts and percentages below all cylinders */
 .cylinder-label {
-    display: block;
+    position: static !important;
+    display: block !important;
     color: #39b9ff !important;
-    font-size: 16px;
+    font-size: 16px !important;
     font-weight: 700;
     text-align: center;
+    text-shadow: none !important;
     margin: 0 0 16px;
+    white-space: nowrap;
 }
 /* =========================================================
    DIAGNOSTICS
