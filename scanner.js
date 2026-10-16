@@ -2214,6 +2214,7 @@ async function verifyCheckinWithRetry(token) {
 
 
 
+
 function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     const bar = document.getElementById(elementId);
     if (!bar) return;
@@ -2223,37 +2224,29 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
         Math.min(100, Number(percentage) || 0)
     );
 
-    const totalSegments = 50;
-    const filledSegments = Math.round(
-        (percent / 100) * totalSegments
-    );
-
     bar.innerHTML = "";
 
-    // Segmented cylinder fill
-    for (let i = 0; i < totalSegments; i++) {
-        const segment = document.createElement("span");
-        segment.className = "checkin-dot";
+    // Segmented progress fill
+    const fill = document.createElement("div");
+    fill.className = "cylinder-fill";
+    fill.style.width = `${percent}%`;
+    bar.appendChild(fill);
 
-        if (i < filledSegments) {
-            segment.classList.add("filled");
-        }
-
-        bar.appendChild(segment);
-    }
-
-    // Counts and percentage displayed over the cylinder
+    // Always-visible count and percentage
     const label = document.createElement("span");
     label.className = "cylinder-label";
+    const safeCheckedIn = Number(checkedIn) || 0;
+    const safeTotal = Number(total) || 0;
+
     label.textContent =
-        `${checkedIn} / ${total} (${Number(percentage).toFixed(1)}%)`;
+        `${safeCheckedIn}/${safeTotal} (${percent.toFixed(1)}%)`;
 
     bar.appendChild(label);
 
     bar.setAttribute("aria-valuenow", String(Math.round(percent)));
     bar.setAttribute(
         "aria-valuetext",
-        `${checkedIn} of ${total} checked in, ${percent.toFixed(1)}%`
+        `${safeCheckedIn} of ${safeTotal} checked in, ${percent.toFixed(1)}%`
     );
 }
 
