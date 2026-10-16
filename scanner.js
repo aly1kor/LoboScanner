@@ -2367,7 +2367,7 @@ function updateStatistics(stats) {
         // NEW: Update entry check-in cylinder
     // (only if a separate entry cylinder exists)
     updateCheckinCylinder(
-        stats.entryCheckInPercent
+        stats.entryCheckInPercent);
 }
 
 
