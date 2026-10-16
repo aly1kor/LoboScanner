@@ -2221,20 +2221,16 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
 
     const checked = Number(checkedIn) || 0;
     const count = Number(total) || 0;
+    const suppliedPercent = Number(percentage);
 
-    // Calculate percentage from counts if the API value is missing.
-    const rawPercent = Number(percentage);
-    const percent = Math.max(
-        0,
-        Math.min(
-            100,
-            Number.isFinite(rawPercent)
-                ? rawPercent
-                : (count > 0 ? checked / count * 100 : 0)
-        )
-    );
+    const percent = Math.max(0, Math.min(
+        100,
+        Number.isFinite(suppliedPercent)
+            ? suppliedPercent
+            : (count > 0 ? checked / count * 100 : 0)
+    ));
 
-    // Build the progress bar.
+    // Create the segmented fill.
     bar.innerHTML = "";
 
     const fill = document.createElement("div");
@@ -2242,7 +2238,7 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     fill.style.width = percent + "%";
     bar.appendChild(fill);
 
-    // Keep the count outside the cylinder.
+    // Display the count outside the cylinder.
     const labelId = elementId + "Label";
     let label = document.getElementById(labelId);
 
@@ -2262,7 +2258,6 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
         `${checked} of ${count} checked in, ${percent.toFixed(1)}%`
     );
 }
-
 
 
 async function apiStatistics() {
