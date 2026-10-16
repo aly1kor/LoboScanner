@@ -2212,7 +2212,9 @@ async function verifyCheckinWithRetry(token) {
 
 
 
-function updateCheckinCylinder(elementId, percentage) {
+
+
+function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     const bar = document.getElementById(elementId);
     if (!bar) return;
 
@@ -2228,6 +2230,7 @@ function updateCheckinCylinder(elementId, percentage) {
 
     bar.innerHTML = "";
 
+    // Segmented cylinder fill
     for (let i = 0; i < totalSegments; i++) {
         const segment = document.createElement("span");
         segment.className = "checkin-dot";
@@ -2239,12 +2242,21 @@ function updateCheckinCylinder(elementId, percentage) {
         bar.appendChild(segment);
     }
 
+    // Counts and percentage displayed over the cylinder
+    const label = document.createElement("span");
+    label.className = "cylinder-label";
+    label.textContent =
+        `${checkedIn} / ${total} (${Number(percentage).toFixed(1)}%)`;
+
+    bar.appendChild(label);
+
     bar.setAttribute("aria-valuenow", String(Math.round(percent)));
     bar.setAttribute(
         "aria-valuetext",
-        `${percent.toFixed(1)}% checked in`
+        `${checkedIn} of ${total} checked in, ${percent.toFixed(1)}%`
     );
 }
+
 
 
 
@@ -2366,16 +2378,19 @@ function updateStatistics(stats) {
 
         // NEW: Update entry check-in cylinder
     // (only if a separate entry cylinder exists)
-    updateCheckinCylinder(
-        stats.entryCheckInPercent);
 
-    updateCheckinCylinder(
+
+updateCheckinCylinder(
     "participantCylinder",
+    stats.checkedInParticipants,
+    stats.totalParticipants,
     stats.participantCheckInPercent
 );
 
 updateCheckinCylinder(
     "entryCylinder",
+    stats.checkedInEntries,
+    stats.totalEntries,
     stats.entryCheckInPercent
 );
     
@@ -2428,15 +2443,20 @@ function updateHomeStatistics(stats) {
 
     updateCheckinCylinder(stats.participantCheckInPercent);
 
-    updateCheckinCylinder(
+updateCheckinCylinder(
     "homeParticipantCylinder",
+    stats.checkedInParticipants,
+    stats.totalParticipants,
     stats.participantCheckInPercent
 );
 
 updateCheckinCylinder(
     "homeEntryCylinder",
+    stats.checkedInEntries,
+    stats.totalEntries,
     stats.entryCheckInPercent
 );
+    
 }
 
 
