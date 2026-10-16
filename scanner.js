@@ -2219,37 +2219,49 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     const bar = document.getElementById(elementId);
     if (!bar) return;
 
+    const checked = Number(checkedIn) || 0;
+    const count = Number(total) || 0;
+
+    // Calculate percentage from counts if the API value is missing.
+    const rawPercent = Number(percentage);
     const percent = Math.max(
         0,
-        Math.min(100, Number(percentage) || 0)
+        Math.min(
+            100,
+            Number.isFinite(rawPercent)
+                ? rawPercent
+                : (count > 0 ? checked / count * 100 : 0)
+        )
     );
 
+    // Build the progress bar.
     bar.innerHTML = "";
 
-    // Segmented progress fill
     const fill = document.createElement("div");
     fill.className = "cylinder-fill";
-    fill.style.width = `${percent}%`;
+    fill.style.width = percent + "%";
     bar.appendChild(fill);
 
-    // Always-visible count and percentage
-    const label = document.createElement("span");
-    label.className = "cylinder-label";
-    const safeCheckedIn = Number(checkedIn) || 0;
-    const safeTotal = Number(total) || 0;
+    // Keep the count outside the cylinder.
+    const labelId = elementId + "Label";
+    let label = document.getElementById(labelId);
+
+    if (!label) {
+        label = document.createElement("div");
+        label.id = labelId;
+        label.className = "cylinder-label";
+        bar.insertAdjacentElement("afterend", label);
+    }
 
     label.textContent =
-        `${safeCheckedIn}/${safeTotal} (${percent.toFixed(1)}%)`;
-
-    bar.appendChild(label);
+        `${checked}/${count} (${percent.toFixed(1)}%)`;
 
     bar.setAttribute("aria-valuenow", String(Math.round(percent)));
     bar.setAttribute(
         "aria-valuetext",
-        `${safeCheckedIn} of ${safeTotal} checked in, ${percent.toFixed(1)}%`
+        `${checked} of ${count} checked in, ${percent.toFixed(1)}%`
     );
 }
-
 
 
 
