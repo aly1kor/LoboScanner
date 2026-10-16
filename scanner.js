@@ -2213,14 +2213,17 @@ async function verifyCheckinWithRetry(token) {
 
 
 
-
 function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     const bar = document.getElementById(elementId);
-    if (!bar) return;
+    if (!bar) {
+        console.warn("Statistics cylinder not found:", elementId);
+        return;
+    }
 
     const checked = Number(checkedIn) || 0;
     const count = Number(total) || 0;
     const suppliedPercent = Number(percentage);
+
     const percent = Math.max(0, Math.min(
         100,
         Number.isFinite(suppliedPercent)
@@ -2228,6 +2231,7 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
             : (count > 0 ? checked / count * 100 : 0)
     ));
 
+    // Reuse the existing fill; remove duplicate children.
     bar.innerHTML = "";
 
     const fill = document.createElement("div");
@@ -2235,14 +2239,27 @@ function updateCheckinCylinder(elementId, checkedIn, total, percentage) {
     fill.style.width = percent + "%";
     bar.appendChild(fill);
 
-    // Put the count OUTSIDE the cylinder.
-    const label = document.createElement("div");
-    label.className = "cylinder-label";
-    label.style.setProperty("color", "#39b9ff", "important");
+    // Use one stable label ID per cylinder.
+    const labelId = elementId + "Label";
+    let label = document.getElementById(labelId);
+
+    if (!label) {
+        label = document.createElement("div");
+        label.id = labelId;
+        label.className = "cylinder-label";
+    }
+
+    // Ensure the label is outside the cylinder.
+    if (label.parentElement !== bar.parentElement ||
+        label.previousElementSibling !== bar) {
+        bar.insertAdjacentElement("afterend", label);
+    }
+
     label.textContent =
         `${checked}/${count} (${percent.toFixed(1)}%)`;
 
-    bar.insertAdjacentElement("afterend", label);
+    label.style.setProperty("color", "#39b9ff", "important");
+    label.style.setProperty("font-size", "16px", "important");
 
     bar.setAttribute("aria-valuenow", String(Math.round(percent)));
     bar.setAttribute(
