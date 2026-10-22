@@ -668,9 +668,7 @@ function showSearchResults(results) {
             childrenCount > 0
         ) {
 
-            countsHTML +=
-                `&nbsp;&nbsp;&nbsp;
-                 ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
+countsHTML += `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
 
         }
 
