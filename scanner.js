@@ -253,6 +253,7 @@ const regidDiv = document.getElementById("regid");
 
 const adultsDiv = document.getElementById("adults");
 const childrenDiv = document.getElementById("children");
+const childrenLabelDiv = document.getElementById("childrenLabel");
 
 const bandsDiv = document.getElementById("bandsCount");
 
@@ -421,7 +422,9 @@ function showParticipant(person) {
     // Children
     // Hide the complete Children row when zero
     // -------------------------------------------------
-
+if (childrenLabelDiv) {
+    childrenLabelDiv.textContent = person.childrenLabel || "Children";
+}
     const childCount =
         Number(person.children) || 0;
 
