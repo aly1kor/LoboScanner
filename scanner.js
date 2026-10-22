@@ -867,7 +867,7 @@ if (diagnosticsEnabled()) {
         }
     );
 
-   // console.log("FULL SEARCH RESPONSE:", JSON.stringify(result, null, 2));
+    console.log("FULL SEARCH RESPONSE:", JSON.stringify(result, null, 2));
 
 }
     return result;
@@ -1359,7 +1359,7 @@ if (diagnosticsEnabled()) {
     }
 );
 
-   // console.log("FULL SEARCH RESPONSE:", JSON.stringify(result, null, 2));
+    console.log("FULL SEARCH RESPONSE:", JSON.stringify(result, null, 2));
 }
     return result;
 
