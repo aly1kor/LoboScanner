@@ -669,7 +669,8 @@ function showSearchResults(results) {
         ) {
 
             countsHTML +=
-                `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
+                `&nbsp;&nbsp;&nbsp;
+                 ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
 
         }
 
@@ -1785,7 +1786,12 @@ async function apiCheckin(token) {
         const text =
             await response.text();
 
-
+console.error("CHECK-IN HTML DEBUG:", {
+    url: response.url,
+    status: response.status,
+    contentType: response.headers.get("content-type"),
+    preview: text.substring(0, 500)
+});
         if (diagnosticsEnabled) {
 
             diagnostic.bodyEnd =
