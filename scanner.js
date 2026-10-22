@@ -417,14 +417,17 @@ function showParticipant(person) {
     adultsDiv.textContent =
         person.adults ?? 0;
 
+    const labelElement = document.getElementById("childrenLabel");
+
+if (labelElement) {
+    labelElement.textContent = person.childrenLabel || "Children";
+}
 
     // -------------------------------------------------
     // Children
     // Hide the complete Children row when zero
     // -------------------------------------------------
-if (childrenLabelDiv) {
-    childrenLabelDiv.textContent = person.childrenLabel || "Children";
-}
+
     const childCount =
         Number(person.children) || 0;
 
