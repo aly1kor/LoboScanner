@@ -663,14 +663,9 @@ function showSearchResults(results) {
         let countsHTML =
             `Adults: <b>${person.adults}</b>`;
 
-        if (
-            Number.isFinite(childrenCount) &&
-            childrenCount > 0
-        ) {
-
-countsHTML += `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
-
-        }
+if (Number.isFinite(childrenCount) && childrenCount > 0) {
+    countsHTML += `&nbsp;&nbsp;&nbsp; <b>${childrenCount}</b>`;
+}
 
         card.className =
             person.checked
