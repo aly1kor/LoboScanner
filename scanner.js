@@ -1786,12 +1786,29 @@ async function apiCheckin(token) {
         const text =
             await response.text();
 
-console.error("CHECK-IN HTML DEBUG:", {
-    url: response.url,
-    status: response.status,
-    contentType: response.headers.get("content-type"),
-    preview: text.substring(0, 500)
-});
+
+if (text.trimStart().startsWith("<")) {
+    const title = text.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+
+    const visibleText = text
+        .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+        .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&nbsp;|&#160;/gi, " ")
+        .replace(/&amp;/gi, "&")
+        .replace(/&quot;/gi, '"')
+        .replace(/\s+/g, " ")
+        .trim();
+
+    console.error("CHECK-IN HTML DEBUG:", {
+        status: response.status,
+        contentType: response.headers.get("content-type"),
+        title: title ? title[1] : "(no title)",
+        visibleText: visibleText.substring(0, 1500),
+        htmlEnd: text.slice(-800)
+    });
+}
+
         if (diagnosticsEnabled) {
 
             diagnostic.bodyEnd =
