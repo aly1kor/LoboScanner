@@ -433,8 +433,7 @@ if (labelElement) {
 
     if (childCount > 0) {
 
-childrenDiv.textContent =
-    `${person.childrenLabel || "Children"}: ${childCount}`;
+childrenDiv.textContent = childCount;
 
         childrenDiv.parentElement.style.display =
             "";
@@ -670,7 +669,7 @@ function showSearchResults(results) {
             `Adults: <b>${person.adults}</b>`;
 
 if (Number.isFinite(childrenCount) && childrenCount > 0) {
-    countsHTML += `&nbsp;&nbsp;&nbsp; <b>${childrenCount}</b>`;
+    countsHTML += `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
 }
 
         card.className =
