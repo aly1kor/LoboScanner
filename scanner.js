@@ -427,8 +427,8 @@ function showParticipant(person) {
 
     if (childCount > 0) {
 
-        childrenDiv.textContent =
-            childCount;
+childrenDiv.textContent =
+    `${person.childrenLabel || "Children"}: ${childCount}`;
 
         childrenDiv.parentElement.style.display =
             "";
@@ -669,8 +669,7 @@ function showSearchResults(results) {
         ) {
 
             countsHTML +=
-                `&nbsp;&nbsp;&nbsp;
-                 Children: <b>${childrenCount}</b>`;
+                `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
 
         }
 
