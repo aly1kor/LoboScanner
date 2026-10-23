@@ -665,14 +665,13 @@ function showSearchResults(results) {
         /*
          * Convert the children value to a number.
          */
-        const childrenCount =
-            Number(person.children);
-
         /*
          * Build the counts separately.
          * Children is added ONLY when greater than zero.
          */
+
 const adultsCount = Number(person.adults) || 0;
+const childrenCount = Number(person.children) || 0;
 
 let countsHTML = "";
 
@@ -680,8 +679,16 @@ if (adultsCount > 0) {
     countsHTML = `Adults: <b>${adultsCount}</b>`;
 }
 
-if (Number.isFinite(childrenCount) && childrenCount > 0) {
-    countsHTML += `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
+if (childrenCount > 0) {
+    const childrenLabel =
+        person.childrenLabel || "Children";
+
+    if (countsHTML !== "") {
+        countsHTML += "&nbsp;&nbsp;&nbsp;";
+    }
+
+    countsHTML +=
+        `${childrenLabel}: <b>${childrenCount}</b>`;
 }
 
         card.className =
