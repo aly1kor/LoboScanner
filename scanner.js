@@ -414,8 +414,15 @@ function showParticipant(person) {
         "Registration : " +
         (person.regid || "");
 
-    adultsDiv.textContent =
-        person.adults ?? 0;
+const adultCount = Number(person.adults) || 0;
+
+if (adultCount > 0) {
+    adultsDiv.textContent = adultCount;
+    adultsDiv.parentElement.style.display = "";
+} else {
+    adultsDiv.textContent = "";
+    adultsDiv.parentElement.style.display = "none";
+}
 
     const labelElement = document.getElementById("childrenLabel");
 
