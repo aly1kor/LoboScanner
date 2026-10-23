@@ -76,23 +76,36 @@ Prepare Google Sheet
 1. Add columns as per columns needed in config.
 2. copy all the appscripts to the new google sheet
 3. Open your Apps Script project, Click Project Settings ⚙️ on the left. Under General settings, find “Show appsscript.json manifest file in editor”. Enable/check that option. ensure timing is "timeZone": "Europe/Berlin",
-4. In appscripts click  Code.gs and  run onOpen - in google sheet you will get generate token button
-5. Click  generate Tokens now token should be filled for all rows
-
-
-Appscripts config(Email sending)
-
-1. in "Test Email" column , make YES for test emails to be sent eg core team
-2. in appscripts click Email.gs and run TestEmail function
-3. Emails will be sent to test recipients, modify email content as needed
-4. Send Email to all participant, run SendAllEmails Function, email sent status is update in google sheet
-5. if recipients >100 then rerun the step5  next day.
-
-6. Deploy the appscripts (always newly )
+4. Ensure Config.gs is updated with correct configs and sheet names, Google Sheet ID etc
+5. Deploy the appscripts (always newly )
    Execute as: Me / User deploying
 Who has access: Anyone
 
-9. copy the exec appscripts url in cloudflare - Settings - Variables and secrets - APPS_SCRIPT_URL
+6. copy the exec appscripts url in cloudflare - Settings - Variables and secrets - APPS_SCRIPT_URL
+
+Sending Invitation Email.
+
+1. in "Test Email" column , make YES for test emails to be sent eg core team
+2. EmailInvitation.gs select and run testInvitationEmail function
+3. Check all ok edit if needed
+4. Send Email to all participant, run sendAllInvitationEmails Function, email sent status is update in google sheet
+5. if recipients >100 then rerun the step5  next day.
+
+Filling Token
+
+1. In appscripts click  Code.gs and  run onOpen - in google sheet you will get generate token button
+2. Click  generate Tokens now token should be filled for all rows in google sheet
+
+
+Appscripts config(EmailQR.gs sending)
+
+1. in "Test Email" column , make YES for test emails to be sent eg core team
+2. in appscripts click EmailQR.gs and run TestEmail function
+3. Emails will be sent to test recipients, modify email content as needed
+4.  Send Email to all participant, run sendAllEmails Function, email sent status is update in google sheet
+
+
+
 
     
 Appscripts config(Feedback sending, After event )
