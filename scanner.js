@@ -672,8 +672,13 @@ function showSearchResults(results) {
          * Build the counts separately.
          * Children is added ONLY when greater than zero.
          */
-        let countsHTML =
-            `Adults: <b>${person.adults}</b>`;
+const adultsCount = Number(person.adults) || 0;
+
+let countsHTML = "";
+
+if (adultsCount > 0) {
+    countsHTML = `Adults: <b>${adultsCount}</b>`;
+}
 
 if (Number.isFinite(childrenCount) && childrenCount > 0) {
     countsHTML += `&nbsp;&nbsp;&nbsp; ${person.childrenLabel || "Children"}: <b>${childrenCount}</b>`;
