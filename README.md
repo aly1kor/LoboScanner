@@ -86,9 +86,9 @@ Who has access: Anyone
 Sending Invitation Email.
 
 1. in "Test Email" column , make YES for test emails to be sent eg core team
-2. EmailInvitation.gs select and run testInvitationEmail function
+2. You can use the Email tools in google sheet to send the respective Email type or EmailInvitation.gs select and run testInvitationEmail function
 3. Check all ok edit if needed
-4. Send Email to all participant, run sendAllInvitationEmails Function, email sent status is update in google sheet
+4. Send Email to all participant,You can use the Email tools in google sheet to send the respective Email type or run sendAllInvitationEmails Function, email sent status is update in google sheet
 5. if recipients >100 then rerun the step5  next day.
 
 Filling Token
@@ -100,9 +100,9 @@ Filling Token
 Appscripts config(EmailQR.gs sending)
 
 1. in "Test Email" column , make YES for test emails to be sent eg core team
-2. in appscripts click EmailQR.gs and run TestEmail function
+2. You can use the Email tools in google sheet to send the respective Email type or in appscripts click EmailQR.gs and run TestEmail function
 3. Emails will be sent to test recipients, modify email content as needed
-4.  Send Email to all participant, run sendAllEmails Function, email sent status is update in google sheet
+4.  Send Email to all participant, You can use the Email tools in google sheet to send the respective Email type or run sendAllEmails Function, email sent status is update in google sheet
 
 
 
