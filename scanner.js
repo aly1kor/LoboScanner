@@ -3157,7 +3157,10 @@ searchText.addEventListener("keypress", function (e) {
 confirmBtn.addEventListener(
     "click",
     async function () {
-
+        
+console.log("TEST: Check-In button click received");
+alert("Check-In button is responding");
+        
         if (!currentToken) {
             return;
         }
