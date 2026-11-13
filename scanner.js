@@ -3161,9 +3161,20 @@ confirmBtn.addEventListener(
 // console.log("TEST: Check-In button click received");
 // alert("Check-In button is responding");
         
-        if (!currentToken) {
-            return;
-        }
+if (!currentToken) {
+    alert(
+        "Check-In not possible!\n\n" +
+        "The selected participant has no QR token.\n" +
+        "Please verify the REGID and TOKEN in the registration sheet."
+    );
+
+    setParticipantStatus(
+        "Check-In unavailable: missing token or RegID.",
+        "error"
+    );
+
+    return;
+}
 
 
         // -----------------------------------------
