@@ -3158,8 +3158,8 @@ confirmBtn.addEventListener(
     "click",
     async function () {
         
-console.log("TEST: Check-In button click received");
-alert("Check-In button is responding");
+// console.log("TEST: Check-In button click received");
+// alert("Check-In button is responding");
         
         if (!currentToken) {
             return;
@@ -3176,6 +3176,10 @@ alert("Check-In button is responding");
 
         confirmBtn.disabled = true;
 
+console.log("CHECK-IN: Starting API request", {
+    token: currentToken
+});
+        
         setParticipantStatus(
             "Checking in..."
         );
@@ -3187,7 +3191,7 @@ alert("Check-In button is responding");
                 await apiCheckin(
                     currentToken
                 );
-
+console.log("CHECK-IN: API response received", result);
 
             // -------------------------------------
             // API RESPONSE RECEIVED
